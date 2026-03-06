@@ -69,7 +69,7 @@ title: visual
 title: working basic
 ---
 
-# Example
+# accessing address
 
 ```c {monaco-run}
 #include <stdio.h>
@@ -90,6 +90,8 @@ int main() {
 title: pointer syntax
 ---
 
+# pointers
+
 ```c {monaco-run}
 #include <stdio.h>
 int main() {
@@ -107,12 +109,117 @@ solution:
 pointer declaration, ekta star maira deo, with jei type er value ache
 declare ar assign alada kora jay
 
+show getting value from pointer
 show print statements and stuffs. 
 -->
 
 ---
-title: pointer type
+layout: section
 ---
+
+# Types of pointers
+
+---
+title: types of pointers
+---
+add `*` in type declaration. 
+=> Voila! you got your pointer type
+
+- `int` type pointer: `int*`
+- `char` type pointer: `char*`
+
+# Why not generic type?
+like 
+```c
+pointer p = &var
+```
+---
+
+```mermaid
+---
+title: 1025
+---
+
+flowchart LR
+
+subgraph byte3
+direction TB
+b3[0000 0000]
+a3[203]
+b3 -.- a3
+end
+
+subgraph byte2
+direction TB
+b2[0000 0000]
+a2[202]
+b2 -.- a2
+end
+
+subgraph byte1
+direction TB
+b1[0000 0100]
+a1[201]
+b1 -.- a1
+end
+
+subgraph byte0
+direction TB
+b0[0000 0001]
+a0[200]
+b0 -.- a0
+end
+
+byte3 -.- byte2 -.- byte1 -.- byte0
+```
+
+```c
+int a = 1025;
+int* p = &a;
+
+printf(p) => 200
+printf(*p) => look for 4 memory blocks
+```
+
+---
+
+```c {monaco-run}
+#include<stdio.h>
+int main(){
+  int a = 1025;
+  int *p = &a;
+  printf("size of int: %d\n", sizeof(int));
+  printf("address: %x, value: %d\n", p, *p);
+}
+```
+
+<!-- 
+1. take another char pointer.
+2. cast previous pointer as char so that we can take 1 byte
+3. same address, but value will change, cz amra 1 block nisi
+
+// 1025 => 00000000 00000000 00000100 000000001
+-->
+
+---
+
+# pointer arithmetic
+
+```c {monaco-run}
+#include<stdio.h>
+int main(){
+  int a = 1025;
+  int *p = &a;
+  printf("size of int: %d\n", sizeof(int));
+  printf("address: %x, value: %d\n", p, *p);
+  // 1025 => 00000000 00000000 00000100 000000001
+  char *p0;
+  p0 = (char*) p;
+  printf("size of int: %d\n", sizeof(char));
+  printf("address: %x, value: %d\n", p0, *p0);
+
+}
+```
 
 ---
 title: pointer to pointer
