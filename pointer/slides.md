@@ -242,8 +242,69 @@ int main(){
 
 ---
 
-# void pointer
+what if we just want address!? 
 
+# void pointers
+````md magic-move
+```c
+#include<stdio.h>
+int main(){
+  int a = 1025;
+  int *p = &a;
+
+  char *p0;
+  p0 = (char*) p;
+}
+```
+```c
+#include<stdio.h>
+int main(){
+  int a = 1025;
+  int *p = &a;
+
+  void *p0;
+  p0 = (char*) p;
+}
+```
+```c
+#include<stdio.h>
+int main(){
+  int a = 1025;
+  int *p = &a;
+
+  void *p0;
+  p0 = p;
+}
+```
+```c
+#include<stdio.h>
+int main(){
+  int a = 1025;
+  int *p = &a;
+
+  void *p0;
+  p0 = p;
+  print("%p\n", p0);
+}
+```
+````
+
+<br>
+
+<v-click>
+
+## Issues
+
+</v-click>
+
+<v-clicks>
+
+- Cannot Derefence: `*p0` not allowed
+- Cannot perform pointer arithmetic: `0p+1` not allowed
+
+</v-clicks>
+
+<!-- baki ja janar, pore janbi usage dekhle. -->
 
 ---
 title: pointer to pointer
