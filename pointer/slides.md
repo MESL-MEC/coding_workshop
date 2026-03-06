@@ -205,7 +205,8 @@ int main(){
 
 # pointer arithmetic
 
-```c {monaco-run}
+````md magic-move
+```c
 #include<stdio.h>
 int main(){
   int a = 1025;
@@ -220,6 +221,28 @@ int main(){
 
 }
 ```
+```c
+#include<stdio.h>
+int main(){
+  int a = 1025;
+  int *p = &a;
+  printf("size of int: %d\n", sizeof(int));
+  printf("address: %x, value: %d\n", p, *p);
+  printf("address: %x, value: %d\n", p+1, *(p+1));
+  // 1025 => 00000000 00000000 00000100 000000001
+  char *p0;
+  p0 = (char*) p;
+  printf("size of int: %d\n", sizeof(char));
+  printf("address: %x, value: %d\n", p0, *p0);
+  printf("address: %x, value: %d\n", p0+1, *(p0+1));
+}
+```
+````
+
+---
+
+# void pointer
+
 
 ---
 title: pointer to pointer
