@@ -189,11 +189,12 @@ int main(){
   int a = 1025;
   int *p = &a;
   printf("size of int: %d\n", sizeof(int));
-  printf("address: %x, value: %d\n", p, *p);
+  printf("address: %p, value: %d\n", p, *p);
 }
 ```
 
 <!-- 
+0. %p for pointer formatting
 1. take another char pointer.
 2. cast previous pointer as char so that we can take 1 byte
 3. same address, but value will change, cz amra 1 block nisi
@@ -212,12 +213,12 @@ int main(){
   int a = 1025;
   int *p = &a;
   printf("size of int: %d\n", sizeof(int));
-  printf("address: %x, value: %d\n", p, *p);
+  printf("address: %p, value: %d\n", p, *p);
   // 1025 => 00000000 00000000 00000100 000000001
   char *p0;
   p0 = (char*) p;
   printf("size of int: %d\n", sizeof(char));
-  printf("address: %x, value: %d\n", p0, *p0);
+  printf("address: %p, value: %d\n", p0, *p0);
 
 }
 ```
@@ -227,14 +228,14 @@ int main(){
   int a = 1025;
   int *p = &a;
   printf("size of int: %d\n", sizeof(int));
-  printf("address: %x, value: %d\n", p, *p);
-  printf("address: %x, value: %d\n", p+1, *(p+1));
+  printf("address: %p, value: %d\n", p, *p);
+  printf("address: %p, value: %d\n", p+1, *(p+1));
   // 1025 => 00000000 00000000 00000100 000000001
   char *p0;
   p0 = (char*) p;
   printf("size of int: %d\n", sizeof(char));
-  printf("address: %x, value: %d\n", p0, *p0);
-  printf("address: %x, value: %d\n", p0+1, *(p0+1));
+  printf("address: %p, value: %d\n", p0, *p0);
+  printf("address: %p, value: %d\n", p0+1, *(p0+1));
 }
 ```
 ````
@@ -287,5 +288,3 @@ title: function pointer and callbacks
 ---
 title: memory leak in C
 ---
-
-nn
