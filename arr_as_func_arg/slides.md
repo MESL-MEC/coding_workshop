@@ -159,7 +159,7 @@ int main() {
 For Arrays:
 - address: `&arr[i]` <=> `arr + i`
 - values : `arr[i]` <=> `*(arr + i)`
-- variable itself is a pointer to the first element of the array <br> `arr` <=> `&arr[0]`
+- <span v-mark="{ at: 2, color: '#ff0000', type: 'underline', multiline: true }"> array variable itself is a pointer to the first element of the array <br> `arr` <=> `&arr[0]` </span>
 
 </v-click>
 
@@ -169,4 +169,286 @@ For Arrays:
 3. so we can say
     - address: arr + i <=> &arr[i]
     - value: *(arr + i) <=> arr[i]
+-->
+
+---
+title: arrays-as-function-arguments
+---
+
+# arrays as function arguments
+
+````md magic-move
+```c
+#include <stdio.h>
+int main() {
+  int arr[5] = {1, 2, 3, 4, 5};
+  for (int i = 0; i < 5; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+}
+```
+```c
+#include <stdio.h>
+void printArray(int arr[5]) {
+  for (int i = 0; i < 5; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+}
+int main() {
+  int arr[5] = {1, 2, 3, 4, 5};
+  printArray(arr);
+}
+```
+```c
+#include <stdio.h>
+void printArray(int arr[]) {
+  for (int i = 0; i < 5; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+}
+int main() {
+  int arr[5] = {1, 2, 3, 4, 5};
+  printArray(arr);
+}
+```
+```c
+#include <stdio.h>
+void printArray(int arr[], int size) {
+  for (int i = 0; i < size; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+}
+int main() {
+  int arr[5] = {1, 2, 3, 4, 5};
+  printArray(arr, 5);
+}
+```
+````
+
+<!-- 
+1. make a simple function.
+2. well function hoite hobe universal. so signature cant be arr[5] it should be arr[].
+3. for now we take size as arguemnent.
+-->
+
+--- 
+title: problems with arrays as function arguments
+layout: two-cols
+---
+# isssues
+
+````md magic-move
+```c
+#include <stdio.h>
+int main() {
+  int x = 5;
+}
+```
+```c
+#include <stdio.h>
+int main() {
+  int x = 5;
+  int size = sizeof(x);
+  printf("memory size of x: %d\n", size); // 4
+}
+```
+```c
+#include <stdio.h>
+int main() {
+  int x[] = {5,5,5,5,5};
+  int size = sizeof(x);
+  printf("memory size of x: %d\n", size); // 20
+}
+```
+```c
+#include <stdio.h>
+int main() {
+  int x[] = {5,5,5,5,5};
+  int size = sizeof(x) / sizeof(x[0]);
+  printf("memory size of x: %d\n", size); // 20
+}
+```
+```c
+#include <stdio.h>
+int main() {
+  int x[] = {5,5,5,5,5};
+  int size = sizeof(x) / sizeof(x[0]);
+  printf("number of elements in x: %d\n", size); // 5
+}
+```
+```c
+#include <stdio.h>
+void printArray(int arr[], int size) {
+  for (int i = 0; i < size; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+}
+int main() {
+  int arr[5] = {1, 2, 3, 4, 5};
+  printArray(arr, 5);
+}
+```
+```c {*|10|10-11|*|10-11,2|*}
+#include <stdio.h>
+void printArray(int arr[], int size) {
+  for (int i = 0; i < size; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+}
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  int size = sizeof(arr) / sizeof(arr[0]);
+  printArray(arr, size);
+}
+```
+```c
+#include <stdio.h>
+void printArray(int arr[]) {
+  for (int i = 0; i < size; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+}
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  printArray(arr);
+}
+```
+```c
+#include <stdio.h>
+void printArray(int arr[]) {
+  int size = sizeof(arr) / sizeof(arr[0]);
+  for (int i = 0; i < size; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+}
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  printArray(arr);
+}
+```
+```c {*|4-6,14-16|*}
+#include <stdio.h>
+void printArray(int arr[]) {
+  int size = sizeof(arr) / sizeof(arr[0]);
+  printf("func: arr size: %d, 0th size: %d\n", 
+      sizeof(arr), sizeof(arr[0])
+  ); // 8
+  for (int i = 0; i < size; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+}
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  printf("main: arr size: %d, 0th size: %d\n", 
+      sizeof(arr), sizeof(arr[0])
+  ); // 8
+  printArray(arr);
+}
+```
+```c {*|14|*}
+#include <stdio.h>
+void printArray(int arr[]) {
+  int size = sizeof(arr) / sizeof(arr[0]);
+  printf("func: arr size: %d, 0th size: %d\n", 
+      sizeof(arr), sizeof(arr[0])
+  ); // 8
+  for (int i = 0; i < size; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+}
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  printf("size of 0th address: %d\n", sizeof(&arr[0])); // 8
+  printf("main: arr size: %d, 0th size: %d\n", 
+      sizeof(arr), sizeof(arr[0])
+  ); // 8
+  printArray(arr);
+}
+```
+```c {*|2}
+#include <stdio.h>
+void printArray(int arr[]) {
+  int size = sizeof(arr) / sizeof(arr[0]);
+  for (int i = 0; i < size; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+}
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  printArray(arr);
+}
+```
+```c {2|*}
+#include <stdio.h>
+void printArray(int *arr) {
+  int size = sizeof(arr) / sizeof(arr[0]);
+  for (int i = 0; i < size; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+}
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  printArray(arr);
+}
+```
+```c
+#include <stdio.h>
+void printArray(int *arr) {
+  for (int i = 0; i < size; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+}
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  int size = sizeof(arr) / sizeof(arr[0]);
+  printArray(arr);
+}
+```
+```c
+#include <stdio.h>
+void printArray(int *arr, int size) {
+  for (int i = 0; i < size; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+}
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  int size = sizeof(arr) / sizeof(arr[0]);
+  printArray(arr, size);
+}
+```
+````
+
+::right::
+
+# code editor
+
+```c {monaco-run}{autorun:false,height:'auto'}
+#include <stdio.h>
+int main() {
+  printf("meow\n");
+}
+```
+<!--
+1. how to calculate size of var -> array
+2. now lets do it in function
+2.1 do calc in main. works
+2.2 do calc in function. does not work?
+3. debug size of function values.
+4. match it with address of 0th element.
+5. now check with any integer pointer
 -->
