@@ -658,6 +658,157 @@ int main(){
 </div>
 
 ---
+layout: two-cols
+title: example
+---
+````md magic-move
+```c [no_func.c]
+void loop(){
+    btSignal = Serial.read();
+    if (btSignal == 'F') {
+        digitalWrite(out1, LOW);
+        digitalWrite(out2, HIGH);
+        digitalWrite(out3, LOW);
+        digitalWrite(out4, LOW);
+    } else if ...
+}
+```
+```c
+void loop(){
+    btSignal = Serial.read();
+    if (btSignal == 'F') {
+        // move forward
+        // spin righ motors
+        digitalWrite(out1, LOW);
+        digitalWrite(out2, HIGH);
+        // spin left motors
+        digitalWrite(out3, LOW);
+        digitalWrite(out4, LOW);
+    } else if ...
+} 
+```
+```c
+void loop(){
+    btSignal = Serial.read();
+    if (btSignal == 'F') {
+        // move forward
+        digitalWrite(out1, LOW);
+        digitalWrite(out2, HIGH);
+        digitalWrite(out3, LOW);
+        digitalWrite(out4, LOW);
+    } else if ...
+} 
+
+void spinRight(){
+    digitalWrite(out1, LOW);
+    digitalWrite(out2, HIGH);
+}
+```
+```c
+void loop(){
+    btSignal = Serial.read();
+    if (btSignal == 'F') {
+        // move forward
+        spinRight();
+        digitalWrite(out3, LOW);
+        digitalWrite(out4, LOW);
+    } else if ...
+}  
+
+void spinRight(){
+    digitalWrite(out1, LOW);
+    digitalWrite(out2, HIGH);
+}
+```
+```c
+void loop(){
+    btSignal = Serial.read();
+    if (btSignal == 'F') {
+        // move forward
+        spinRight();
+        spinLeft();
+    } else if ...
+}  
+
+void spinRight(){
+    digitalWrite(out1, LOW);
+    digitalWrite(out2, HIGH);
+}
+
+void spinLeft(){
+    digitalWrite(out3, LOW);
+    digitalWrite(out4, LOW);
+}
+```
+```c
+void loop(){
+    btSignal = Serial.read();
+    if (btSignal == 'F') {
+        // move forward
+        spinRight();
+        spinLeft();
+    } else if ...
+}  
+
+void spinRight(){
+    digitalWrite(out1, LOW);
+    digitalWrite(out2, HIGH);
+}
+
+void spinLeft(){
+    digitalWrite(out3, LOW);
+    digitalWrite(out4, LOW);
+}
+
+void moveForward(){
+    spinRight();
+    spinLeft();
+}
+```
+```c
+void loop(){
+    btSignal = Serial.read();
+    if (btSignal == 'F') {
+        moveForward();
+    } else if ...
+}  
+
+void spinRight(){
+    digitalWrite(out1, LOW);
+    digitalWrite(out2, HIGH);
+}
+
+void spinLeft(){
+    digitalWrite(out3, LOW);
+    digitalWrite(out4, LOW);
+}
+
+void moveForward(){
+    spinRight();
+    spinLeft();
+}
+```
+````
+
+::right::
+
+<v-click>
+
+```c
+void loop(){
+    btSignal = Serial.read();
+    if (btSignal == 'F') {
+        digitalWrite(out1, LOW);
+        digitalWrite(out2, HIGH);
+        digitalWrite(out3, LOW);
+        digitalWrite(out4, LOW);
+    } else if ...
+}
+```
+</v-click>
+
+
+---
 zoom: 1.4
 ---
 
