@@ -452,3 +452,87 @@ int main() {
 4. match it with address of 0th element.
 5. now check with any integer pointer
 -->
+
+---
+
+# easter egg
+
+````md magic-move
+```c {*|4}
+#include <stdio.h>
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  printf("%d\n", arr[2]);
+}
+```
+```c {4}
+#include <stdio.h>
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  printf("%d\n", arr[2]); // x[i] <=> *(x + i)
+}
+```
+```c {4}
+#include <stdio.h>
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  printf("%d\n", *(arr + 2)); // x[i] <=> *(x + i)
+}
+```
+```c {4}
+#include <stdio.h>
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  printf("%d\n", *(2 + arr)); // x[i] <=> *(x + i)
+}
+```
+```c {4|*}
+#include <stdio.h>
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  printf("%d\n", 2[arr]); // x[i] <=> *(x + i)
+}
+```
+```c {*|4}
+#include <stdio.h>
+void printArray(int *arr, int size) {
+  for (int i = 0; i < size; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+}
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  int size = sizeof(arr) / sizeof(arr[0]);
+  printArray(arr, size);
+}
+```
+```c {4|*}
+#include <stdio.h>
+void printArray(int *arr, int size) {
+  for (int i = 0; i < size; i++) {
+    printf("%d ", *(arr + i));
+  }
+  printf("\n");
+}
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  int size = sizeof(arr) / sizeof(arr[0]);
+  printArray(arr, size);
+}
+```
+````
+
+<div v-click="[6, 7]">
+
+## test
+
+```c {monaco-run}{autorun:false,height:'auto'}
+#include <stdio.h>
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  printf("%d\n", 2[arr]);
+}
+```
+
+</div v-click>
