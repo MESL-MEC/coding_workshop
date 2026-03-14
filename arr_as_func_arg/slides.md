@@ -536,3 +536,45 @@ int main() {
 ```
 
 </div v-click>
+
+---
+
+# practice
+
+task 1: square all elements of an array using a function.
+
+<v-click>
+task 2: preserve original array
+</v-click>
+
+```c {monaco-run}{autorun:false,height:'auto'}
+#include <stdio.h>
+
+void printArray(int *arr, int size) {
+  for (int i = 0; i < size; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
+}
+
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  int size = sizeof(arr) / sizeof(arr[0]);
+  printArray(arr, size);
+}
+```
+
+<!-- 
+1. 
+void squareArray(int *arr, int size) {
+  for (int i = 0; i < size; i++) {
+    arr[i] = arr[i] * arr[i];
+  }
+}
+2. hint scanf
+void squareArray(int *arr, int size, int *NEWarr) {
+  for (int i = 0; i < size; i++) {
+    NEWarr[i] = arr[i] * arr[i];
+  }
+}
+-->
