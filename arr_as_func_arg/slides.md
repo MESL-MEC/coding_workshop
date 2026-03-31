@@ -21,7 +21,7 @@ as Function Arguments
 
 ---
 title: prerequisites-pointers
-layout: two-cols
+zoom: 1.25
 ---
 
 # pointers
@@ -80,6 +80,8 @@ pointer arithmetic
 -->
 
 ---
+zoom: 1.25
+---
 
 # arrays
 ````md magic-move
@@ -118,9 +120,9 @@ int main() {
 #include <stdio.h>
 int main() {
   int arr[5] = {1, 2, 3, 4, 5};
-  printf("First element: %p\n", &arr[0]); // 304
-  printf("Second element: %p\n", &arr[1]); // 308
-  printf("Third element: %p\n", &arr[2]); // 312
+  printf("First element's address: %p\n", &arr[0]); // 304
+  printf("Second element's address: %p\n", &arr[1]); // 308
+  printf("Third element's address: %p\n", &arr[2]); // 312
 }
 ```
 ```c
@@ -142,6 +144,8 @@ access elements
 arrays are stored in contiguous memory locations
 -->
 
+---
+zoom: 1.25
 ---
 
 ```c {monaco-run}
@@ -173,6 +177,7 @@ For Arrays:
 
 ---
 title: arrays-as-function-arguments
+zoom: 1.25
 ---
 
 # arrays as function arguments
@@ -239,7 +244,7 @@ int main() {
 title: problems with arrays as function arguments
 layout: two-cols
 ---
-# isssues
+isssues
 
 ````md magic-move
 ```c
@@ -435,7 +440,7 @@ int main() {
 
 ::right::
 
-# code editor
+code editor
 
 ```c {monaco-run}{autorun:false,height:'auto'}
 #include <stdio.h>
@@ -453,6 +458,8 @@ int main() {
 5. now check with any integer pointer
 -->
 
+---
+zoom: 1.25
 ---
 
 # easter egg
@@ -537,6 +544,8 @@ int main() {
 
 </div v-click>
 
+---
+zoom: 1.25
 ---
 
 # practice
